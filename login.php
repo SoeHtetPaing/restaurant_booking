@@ -86,6 +86,9 @@ function saveSessionData ($data) {
         </div>
     </div>
 </div>
+</div>
+
+<div style="height: 300px; background-image: url('./asset/img/restaurant_icons.png')"></div>
 
 <?php require_once('./asset/layout/footer.php');
 

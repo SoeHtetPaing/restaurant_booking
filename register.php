@@ -54,6 +54,10 @@
                           <input type="text" name="phone" class="form-control" required="" placeholder="Restaurant Phone">
                         </div>
                         <div class="form-group mb-3">
+                          <label for="imageqr" class="text-danger">* Essential need KBZ QR</label>
+                          <input type="file" name="imageqr" class="form-control" required="" >
+                        </div>
+                        <div class="form-group mb-3">
                         <select class="form-control" name="area" name="area" required="">
                           <option value="" class="text-muted">Select location :</option>
                           <?php 
@@ -83,5 +87,8 @@
         </div>
     </div>
 </div>
+</div>
+
+<div style="height: 300px; background-image: url('./asset/img/restaurant_icons.png')"></div>
 
 <?php require_once('./asset/layout/footer.php');
