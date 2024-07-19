@@ -11,10 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Italianno&family=Reenie+Beanie&display=swap" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="./asset/js/fontawesome.6.5.2.all.min.js"></script>
 
     <link rel="stylesheet" href="./asset/css/style.css">
     
@@ -204,13 +209,29 @@
                 <h5>Restaurant Booking</h5>
             </div>
             <div class="">
-                <ul style="list-style-type: none;" class="">
-                    <li class="mx-2"><a class="navbar-item active-link" href="index.php">HOME</a></li>
+                <ul style="list-style-type: none;" class="d-flex align-items-center">
+                    <li class="mx-2"><a class="navbar-item active-link" href="index.php">Home</a></li>
                     <?php if(!isset($_SESSION['isLoggedIn'])){ ?>
-                        <li class="link mx-2"><a class="navbar-item" href="./register.php">REGISTER</a></li>
-                        <li class="link mx-2"><a class="navbar-item" href="./login.php">LOGIN</a></li>
+                        <li class="link mx-2"><a class="navbar-item" href="./register.php">Register</a></li>
+                        <li class="link mx-2"><a class="navbar-item" href="./login.php">Login</a></li>
 	                <?php }elseif (isset($_SESSION['isLoggedIn'])) { ?>
-	                <li class="mx-2"><a class="navbar-profile" href="./logout.php"><?php echo $_SESSION['name']; ?>(Logout)</a></li>
+	                <li class="mx-2">
+                    <div class="dropdown">
+                      <a class="dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color: #fff;">
+                        <?php $pp = $_SESSION["image"]; ?>
+                        <div class="me-2" style="width: 30px; height: 30px; background-image: url('./asset/upload/<?php echo $pp; ?>'); background-size: cover; background-position: center; border-radius: 50%;"></div>
+                        <?php echo $_SESSION['name']; ?>
+                      </a>
+                      <ul class="dropdown-menu">
+                      <?php if($_SESSION['role'] != "r"){ ?>
+                        <li><a class="dropdown-item text-muted" href="./asset/restaurant/customerProfile.php"><i class="fa-solid fa-user me-3"></i>My Profile</a></li>
+                        <li><a class="dropdown-item text-muted" href="./asset/restaurant/customerBookingList.php"><i class="fa-solid fa-receipt me-3"></i>Booking History</a></li>
+	                    <?php } ?>
+                        <li><a class="dropdown-item text-muted" href="./logout.php"><i class="fa-solid fa-power-off me-3"></i>Logout</a></li>
+                      </ul>
+                    </div>
+                  </li>
+	                
 	                <?php } ?>    
                 </ul>
             </div>

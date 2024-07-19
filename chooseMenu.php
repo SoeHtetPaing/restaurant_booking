@@ -47,7 +47,7 @@ if (isset($_POST['selectChair'])) {
                 <div class="tab-content my-3" id="tab-content">
                   <div class="tab-pane active" id="fill-tabpanel-0" role="tabpanel" aria-labelledby="fill-tab-0">
                     <?php 
-                        $menus = selectMenuByRestaurant($database, "အဓိက", $rid);
+                        $menus = selectMenuByRestaurant($database, "Main", $rid);
 
                         foreach ($menus as $menu) {
                             echo '
@@ -72,7 +72,7 @@ if (isset($_POST['selectChair'])) {
                   </div>
                   <div class="tab-pane" id="fill-tabpanel-1" role="tabpanel" aria-labelledby="fill-tab-1">
                   <?php 
-                        $menus = selectMenuByRestaurant($database, "အချိုပွဲ", $rid);
+                        $menus = selectMenuByRestaurant($database, "Dessert", $rid);
                     
                         foreach ($menus as $menu) {
                             echo '

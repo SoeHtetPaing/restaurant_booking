@@ -156,7 +156,7 @@
 
 		echo $bid;
 
-		$success = insertBooking($database, $bid, $rid, $uid, $makedate, $maketime, $reservation_name, $reservation_phone, $reservation_date, $reservation_time, $total_price, $transaction_id);
+		$success = insertBooking($database, $bid, $rid, $uid, $makedate, $maketime, $reservation_name, $reservation_phone, $reservation_date, $reservation_time, $total_price, $transaction_id, 0, "We are still approving, please wait a movement!");
 		if ($success) {
 			$binsert = true;
 		}else {
@@ -198,7 +198,7 @@
         }
 
        if ($binsert == true && $cinsert == true && $minsert == true) {
-    		echo '<script>alert("Your booking is done. You will get an email soon.")</script>';
+    		echo '<script>alert("Your booking is done. Please wait a movement for confirmation.")</script>';
     		echo '<script>window.location="../../index.php"</script>';
     	}else {
     		echo "Error! Something worng.";

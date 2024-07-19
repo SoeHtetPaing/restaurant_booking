@@ -16,7 +16,8 @@
             $password_check = password_verify($password, $customer["password"]);
             if ($password_check){
                 
-                saveSessionData($customer);
+                saveSessionData($customer, "c");
+
                 
                 header('location: ./index.php');
 
@@ -28,7 +29,7 @@
             $restaurant = selectRestaurantByEmail($database, $email);
             $password_check = password_verify($password, $restaurant["password"]);
             if ($password_check){
-                saveSessionData($restaurant);
+                saveSessionData($restaurant, "r");
                 
                 header('location: ./asset/restaurant/index.php');
 
@@ -47,7 +48,7 @@
     $error='<label for="promter" class="form-label">&nbsp;</label>';
 }
 
-function saveSessionData ($data) {
+function saveSessionData ($data, $role) {
         $_SESSION['isLoggedIn'] = true;
 
         $_SESSION['id'] = $data['id'];
@@ -55,6 +56,15 @@ function saveSessionData ($data) {
         $_SESSION['phone'] = $data['phone'];
         $_SESSION['email'] = $data['email'];
         $_SESSION['password'] = $data['password'];
+
+        $_SESSION["role"] = $role;
+
+        if($role == "c") {
+            $_SESSION["image"] = $data['img'];
+        } else {
+            $_SESSION["image"] = $data['logo'];
+        }
+
   
 }
 

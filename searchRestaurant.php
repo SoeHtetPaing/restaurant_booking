@@ -36,7 +36,7 @@
           </div>
       </div>
 
-      <div class="bg-light py-5">
+      <div class="bg-light py-5" id="target">
         <div class="text-center">
           <h6 class="text-muted">Our Restaurants</h6>
           <h2>Discover Our Exclusive Restaurants</h2>

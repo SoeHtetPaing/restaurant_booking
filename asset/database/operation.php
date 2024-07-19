@@ -28,6 +28,13 @@
         return $customer;
     }
 
+    function selectCustomerById ($database, $id) {
+        $sql = "select * from customer where id='$id';";
+        $customer = $database->query($sql)->fetch_assoc();
+
+        return $customer;
+    }
+
     function selectRestaurantByEmail ($database, $email) {
         $sql = "select * from restaurant where email='$email';";
         $restaurant = $database->query($sql)->fetch_assoc();
@@ -70,9 +77,37 @@
         return $menu;
     }
 
+    function checkMenu ($database, $rid, $mname, $price) {
+        $sql =  "select * from restaurant_menu where rid = '$rid' and mname='$mname' and price='$price';";
+        $check = $database->query($sql)->fetch_assoc();
+
+        return $check;
+    }
+
+    function selectMenu ($database, $rid) {
+        $sql = "select * from restaurant_menu where rid='$rid';";
+        $menu = $database->query($sql);
+
+        return $menu;
+    }
+
     function selectTable ($database, $rid) {
         $sql = "select * from restaurant_table where rid='$rid';";
         $table = $database->query($sql);
+
+        return $table;
+    }
+
+    function getTableId ($database) {
+        $sql = "select count(tid) as tid from restaurant_table;";
+        $tid = $database->query($sql)->fetch_assoc();
+
+        return $tid;
+    }
+
+    function selectLastInsertTable ($database, $rid) {
+        $sql = "select * from restaurant_table where rid='$rid' order by tname desc limit 1;";
+        $table = $database->query($sql)->fetch_assoc();
 
         return $table;
     }
@@ -96,6 +131,54 @@
         $chair = $database->query($sql)->fetch_assoc();
 
         return $chair;
+    }
+
+    function selectChairByCno ($database, $cno) {
+        $sql = "select * from restaurant_chair where cno='$cno';";
+        $chair = $database->query($sql)->fetch_assoc();
+
+        return $chair;
+    }
+
+    function selectBookingByRestaurantId ($database, $rid) {
+        $sql = "select * from booking where rid='$rid' order by makedate desc;";
+        $booking = $database->query($sql);
+
+        return $booking;
+    }
+
+    function selectBookingByCustomerId ($database, $cid) {
+        $sql = "select * from booking where cid='$cid' order by makedate desc;";
+        $booking = $database->query($sql);
+
+        return $booking;
+    }
+
+    function selectBookingById ($database, $bid) {
+        $sql = "select * from booking where bid='$bid';";
+        $booking = $database->query($sql)->fetch_assoc();
+
+        return $booking;
+    }
+
+    function selectBookingChair ($database, $bid) {
+        $sql = "select bc.bid,bc.cno,rt.tname from booking_chair as bc, restaurant_chair as rc,restaurant_table as rt where bc.cid = rc.cid and rc.tid = rt.tid and bc.bid ='$bid';";
+        $chair = $database->query($sql);
+
+        return $chair;
+    }
+
+    function selectBookingMenu ($database, $bid) {
+        $sql = "select bm.bid,bm.qty,rm.mname,rm.price from booking_menu as bm, restaurant_menu as rm where bm.mid = rm.mid and bm.bid ='$bid';";
+        $menu = $database->query($sql);
+
+        return $menu;
+    }
+
+    function filterData ($database, $sql) {
+        $filter = $database->query($sql);
+
+        return $filter;
     }
 
     // end select
@@ -151,8 +234,8 @@
         return $success;
     }
 
-    function insertBooking ($database, $bid, $rid, $uid, $makedate, $maketime, $name, $phone, $bdate, $btime, $bill, $transaction) {
-        $sql = "insert into booking(bid,rid,cid,makedate, maketime, name, phone, bdate, btime, bill,transaction) values ('$bid','$rid','$uid','$makedate','$maketime','$name','$phone','$bdate','$btime','$bill','$transaction');";
+    function insertBooking ($database, $bid, $rid, $uid, $makedate, $maketime, $name, $phone, $bdate, $btime, $bill, $transaction, $status, $reject) {
+        $sql = "insert into booking(bid,rid,cid,makedate, maketime, name, phone, bdate, btime, bill,transaction,status,reject_reason) values ('$bid','$rid','$uid','$makedate','$maketime','$name','$phone','$bdate','$btime','$bill','$transaction', '$status','$reject');";
         $success = $database->query($sql);
 
         return $success;
@@ -173,3 +256,51 @@
     }
 
     //insert end
+
+    //update start
+
+    function updateRestaurant ($database, $sql) {
+        $success = $database->query($sql);
+
+        return $success;
+    }
+
+    function updateBooking ($database, $sql) {
+        $success = $database->query($sql);
+
+        return $success;
+    }
+
+    //update end
+
+    //delete strat
+
+    function deleteChair ($database, $cid) {
+        $sql = "delete from restaurant_chair where cid ='$cid';";
+        $success = $database->query($sql);
+
+        return $success;
+    }
+
+    function deleteChairByTable ($database, $tid) {
+        $sql = "delete from restaurant_chair where tid ='$tid';";
+        $success = $database->query($sql);
+
+        return $success;
+    }
+
+    function deleteTable ($database, $tid) {
+        $sql = "delete from restaurant_table where tid ='$tid';";
+        $success = $database->query($sql);
+
+        return $success;
+    }
+
+    function deleteMenu ($database, $mid) {
+        $sql = "delete from restaurant_menu where mid ='$mid';";
+        $success = $database->query($sql);
+
+        return $success;
+    }
+
+    //delete end

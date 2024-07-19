@@ -51,7 +51,7 @@
         <div class="col-sm col-lg-6 offset-lg-3 my-5">
                                 
         <div class="row d-flex">
-          <div class="col-md-4 ftco-animate img rounded" style="background-image: url(./asset/upload/<?php echo $restaurant["logo"]; ?>); background-size: contain; background-position: center;"></div>
+          <div class="col-md-4 ftco-animate img rounded" style="background-image: url(./asset/upload/<?php echo $restaurant["logo"]; ?>); background-size: cover; background-position: center;"></div>
           <div class="col-md-8 ftco-animate makereservation p-5 bg-light">
             
             <form action="./chooseTable.php" method="POST">
